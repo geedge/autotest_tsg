@@ -1,0 +1,15 @@
+*** Settings ***
+Library           REST    http://192.168.40.120:8080
+Library           Collections
+
+*** Keywords ***
+SecurityEventLogs
+    [Arguments]    ${starttime}    ${endtime}    ${policyid}    ${clientip}    ${key}    ${value}
+    ${rescode}    Set Variable    200
+    [Return]    ${rescode}
+
+Proxy Event Logs
+
+Session Records
+
+Radius Logs
