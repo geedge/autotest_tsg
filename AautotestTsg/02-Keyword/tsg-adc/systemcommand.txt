@@ -1,0 +1,51 @@
+*** Settings ***
+Library           OperatingSystem
+Library           Selenium2Library
+Library           RequestsLibrary
+Library           Collections
+
+*** Keywords ***
+SystemCommand
+    [Arguments]    ${commandstr}    @{stringlist}
+    ${commandreturn}    OperatingSystem.Run    ${commandstr}
+    #nslookup -d www.jd.com
+    #log    ${commandreturn
+    FOR    ${var}    IN    @{stringlist}
+        log    dxytest
+        log    ${var}
+        Should Contain    ${commandreturn}    ${var}
+    END
+    #Should Contain    ${commandreturn}    ${qatype}
+    ${rescode}    Set Variable    200
+    log    ${rescode}
+    [Return]    ${rescode}
+
+DNS
+    [Arguments]    ${commandstr}    ${qatype}    ${qaaatype}    ${ttlparm}
+    ${commandreturn}    OperatingSystem.Run    ${commandstr}
+    #log    ${commandreturn}
+    #${qatype}    Set Variable    www.jd.com, type = A, class = IN
+    #${qaaatype}    Set Variable    www.jd.com.gslb.qianxun.com
+    #${ttlparm}    Set Variable    ttl =
+    #${b}    Should Contain    ${c}    ${qatype}
+    Should Contain    ${commandreturn}    ${qatype}
+    Should Contain    ${commandreturn}    ${qaaatype}
+    Should Contain    ${commandreturn}    ${ttlparm}
+    ${rescode}    Set Variable    200
+    [Return]    ${rescode}
+
+CURL
+    [Arguments]    ${commandstr}    ${cn}    ${User-Agent}    ${Content-Type}    ${text}
+    ${commandreturn}    OperatingSystem.Run    ${commandstr}
+    #curl -kv https://www.baidu.com | iconv -f utf-8 -t gbk
+    #log    ${commandreturn}
+    #${cn}    Set Variable    CN=GlobalSign Organization Validation CA - SHA256 - G2
+    #${User-Agent}    Set Variable    curl/7.67.0
+    #${Content-Type}    Set Variable    text/html
+    #${text}    Set Variable    百度一下
+    Should Contain    ${commandreturn}    ${cn}
+    Should Contain    ${commandreturn}    ${User-Agent}
+    Should Contain    ${commandreturn}    ${Content-Type}
+    Should Contain    ${commandreturn}    ${text}
+    ${rescode}    Set Variable    200
+    [Return]    ${rescode}
