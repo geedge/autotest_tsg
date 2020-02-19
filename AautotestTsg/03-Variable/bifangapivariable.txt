@@ -9,4 +9,3 @@ ${username}       uitest
 ${password}       111111
 ${encodePassword}    ${EMPTY}
 ${token}          ${EMPTY}
-@{logType}        security_event_log    proxy_event_log

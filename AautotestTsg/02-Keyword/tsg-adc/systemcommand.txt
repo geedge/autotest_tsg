@@ -5,11 +5,45 @@ Library           RequestsLibrary
 Library           Collections
 
 *** Keywords ***
-SystemCommand
+SystemCommandnew
     [Arguments]    ${commandstr}    @{stringlist}
+    #log    ${commandreturn}
+    ${commandreturn}    OperatingSystem.Run    ${commandstr}
+    FOR    ${var}    IN    @{stringlist}
+        log    dxytest
+        log    ${var}
+        Should Contain    ${commandreturn}    ${var}
+    END
+    #Should Contain    ${commandreturn}    ${qatype}
+    ${rescode}    Set Variable    200
+    log    ${rescode}
+    [Return]    ${rescode}
+
+SystemCommands
+    [Arguments]    ${commandstr}    @{stringlist}
+    ${commandreturn}    OperatingSystem.Run    cd E:\curl-7.67.0-win64-mingw\bin
+    ${commandreturn}    OperatingSystem.Run    e:
+    log    dxytest
+    log    ${commandreturn}
     ${commandreturn}    OperatingSystem.Run    ${commandstr}
     #nslookup -d www.jd.com
-    #log    ${commandreturn
+    #log    ${commandreturn}
+    FOR    ${var}    IN    @{stringlist}
+        log    dxytest
+        log    ${var}
+        Should Contain    ${commandreturn}    ${var}
+    END
+    #Should Contain    ${commandreturn}    ${qatype}
+    ${rescode}    Set Variable    200
+    log    ${rescode}
+    [Return]    ${rescode}
+
+SystemCommand
+    [Arguments]    ${commandstr}    @{stringlist}
+    log    dxytest${commandstr}
+    ${commandreturn}    OperatingSystem.Run    ${commandstr}
+    #nslookup -d www.jd.com
+    log    ${commandreturn}
     FOR    ${var}    IN    @{stringlist}
         log    dxytest
         log    ${var}
@@ -47,5 +81,20 @@ CURL
     Should Contain    ${commandreturn}    ${User-Agent}
     Should Contain    ${commandreturn}    ${Content-Type}
     Should Contain    ${commandreturn}    ${text}
+    ${rescode}    Set Variable    200
+    [Return]    ${rescode}
+
+CURLNEW
+    ${commandreturn}    OperatingSystem.Run    E:\\curl-7.67.0-win64-mingw\\bin\\curl -kv https://www.baidu.com | iconv -f utf-8 -t gbk
+    #curl -kv https://www.baidu.com | iconv -f utf-8 -t gbk
+    #log    ${commandreturn}
+    #${cn}    Set Variable    CN=GlobalSign Organization Validation CA - SHA256 - G2
+    #${User-Agent}    Set Variable    curl/7.67.0
+    #${Content-Type}    Set Variable    text/html
+    #${text}    Set Variable    百度一下
+    Should Contain    ${commandreturn}    ${User-Agent}
+    Should Contain    ${commandreturn}    ${Content-Type}
+    Should Contain    ${commandreturn}    ${text}
+    Should Contain    ${commandreturn}    ${cn}
     ${rescode}    Set Variable    200
     [Return]    ${rescode}

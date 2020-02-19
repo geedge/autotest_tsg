@@ -1,7 +1,7 @@
 *** Settings ***
+Resource          ../../03-Variable/bifangapivariable.txt
 Library           REST    http://${host}:${port}
 Library           Collections
-Resource          ../../03-Variable/bifangapivariable.txt
 
 *** Keywords ***
 Login

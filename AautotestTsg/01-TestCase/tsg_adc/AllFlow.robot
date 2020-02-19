@@ -31,6 +31,12 @@ allflow
     ${rescode}    SystemCommand    ${commandstr}    @{stringlist}
     ${endtime}    Get Time
     log    ${rescode}
+    ${commandstr}    set variable    curl -kv https://www.baidu.com
+    @{stringlist}    set variable    CN=GlobalSign Organization Validation CA - SHA256 - G2    text/html
+    ${starttime}    Get Time
+    ${rescode}    SystemCommand    ${commandstr}    @{stringlist}
+    ${endtime}    Get Time
+    log    ${rescode}
     #Integer    ${rescode}    200
     #日志验证
     #${rescode}    SecurityEventLogs    ${starttime}    ${endtime}    ${policyid}    ${clientip}    ${key}    ${value}
