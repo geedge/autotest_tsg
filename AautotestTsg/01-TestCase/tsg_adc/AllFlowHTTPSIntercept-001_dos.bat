@@ -1,1 +1,0 @@
-curl -kv https://www.baidu.com | iconv -f utf-8 -t gbk

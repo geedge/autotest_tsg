@@ -1,1 +1,0 @@
-E:\\curl-7.67.0-win64-mingw\\bin\\curl -kv https://www.baidu.com | iconv -f utf-8 -t gbk
